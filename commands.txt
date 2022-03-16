@@ -1,0 +1,19 @@
+# build docker image
+docker build -t mbnhmd/rasa-docker .
+
+# run the docker image
+docker run -it -p 8080:8080 mbnhmd/rasa-docker
+or
+docker run -it mbnhmd/rasa-docker shell
+
+
+#  build action server with rasa
+docker build . -t rasa/rasa-sdk:2.8.4
+
+# run rasa action image
+docker run -it -p 5005:5005 rasa/rasa-sdk:2.8.4
+
+# create rasa network
+docker network create action-server-link
+
+docker run -d -v $(pwd)/actions:/app/actions --net action-server-link --name action-server-test rasa/rasa-sdk:2.8.4

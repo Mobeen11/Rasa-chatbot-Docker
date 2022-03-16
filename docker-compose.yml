@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  rasa_action_server:
+    image: "rasa/rasa-sdk:2.8.4"
+    volumes:
+      - './actions : /app/actions'
+    expose:
+      - '5005 : 5005'
